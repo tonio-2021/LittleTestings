@@ -35,7 +35,7 @@ def minimum_tree_vertex_cover(edges):
     parent = {root: None}
     order = [root]
 
-    # This first walk gives the tree a direction. Later I can work backwards.
+    # I root the tree first because the parent and child idea is easier that way.
     for vertex in order:
         for neighbour in graph[vertex]:
             if neighbour == parent[vertex]:
@@ -52,6 +52,7 @@ def minimum_tree_vertex_cover(edges):
     included = {}
     excluded = {}
 
+    # Starting at the end means the children are already done when I need them.
     for vertex in reversed(order):
         children = [
             neighbour
@@ -59,12 +60,12 @@ def minimum_tree_vertex_cover(edges):
             if parent.get(neighbour) == vertex
         ]
 
-        # If I take this vertex, each child can use whichever option is smaller.
+        # When this vertex is used, the children can choose their cheaper option.
         included[vertex] = 1 + sum(
             min(included[child], excluded[child]) for child in children
         )
 
-        # If I skip it, every child has to cover the edge going up to this vertex.
+        # When I skip it, every child has to cover the edge between them.
         excluded[vertex] = sum(included[child] for child in children)
 
     cover = set()
@@ -81,10 +82,10 @@ def minimum_tree_vertex_cover(edges):
                 continue
 
             if take_vertex:
-                # Both choices work here, so I keep the cheaper one.
+                # The parent is already in, so I just use the cheaper child choice.
                 take_child = included[neighbour] <= excluded[neighbour]
             else:
-                # The parent was skipped, which means the child has to be used.
+                # Otherwise this child has to be used to cover their edge.
                 take_child = True
 
             choices.append((neighbour, take_child))

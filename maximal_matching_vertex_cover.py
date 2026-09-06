@@ -19,15 +19,15 @@ def maximal_matching_vertex_cover(edges):
     matching = []
 
     while remaining_edges:
-        # I can just take the first edge here. It does not have to be a clever choice.
+        # For now I just take the first edge I can find.
         u, v = remaining_edges[0]
         matching.append((u, v))
 
-        # Taking both ends can be a bit wasteful, but now this edge is definitely covered.
+        # I take both sides, even though sometimes one would already be enough.
         cover.add(u)
         cover.add(v)
 
-        # The edges touching u or v are done, so I only keep the other ones.
+        # Anything touching these vertices is covered now and can be ignored.
         remaining_edges = [
             edge
             for edge in remaining_edges
