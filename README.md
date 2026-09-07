@@ -4,15 +4,19 @@ This is a collection of small things I try while going through different
 topics from university. Most of them are just short experiments to make the
 ideas a bit more concrete.
 
-## Estimating pi with random points
+## Estimating pi, logarithms, and e with random points
 
-This is a small Monte Carlo experiment I made to see how closely random
-sampling can approximate pi.
+This started as a small Monte Carlo experiment for approximating pi. I added
+two related experiments to see what else the same random-area idea can do.
 
 The idea is simple: scatter 10,000 random points across the square
 `[-1, 1] × [-1, 1]` and count how many fall inside the unit circle. The
 circle covers `pi / 4` of the square, so multiplying that fraction by four
 gives us an estimate of pi.
+
+For a logarithm, the notebook counts points below `1/x`, since the area from
+1 to a value is its natural logarithm. It then estimates Euler's number by
+looking for the point where that accumulated area reaches 1.
 
 ## Try it yourself
 
