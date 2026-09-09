@@ -66,3 +66,19 @@ needs two.
 python3 tree_vertex_cover.py
 python3 -m unittest test_tree_vertex_cover.py
 ```
+
+## Independent sets and vertex covers
+
+After the two vertex-cover examples, I wanted to check the connection with
+independent sets. A set is independent when it never contains both ends of an
+edge. This means its complement has to cover every edge.
+
+The script checks all subsets of a small graph and finds both a largest
+independent set and a smallest vertex cover. It also checks that their sizes
+add up to the number of vertices. The exhaustive search gets slow quickly, so
+this one is really only meant for small examples.
+
+```bash
+python3 independent_set_vertex_cover.py
+python3 -m unittest test_independent_set_vertex_cover.py
+```
