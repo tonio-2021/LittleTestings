@@ -82,3 +82,20 @@ this one is really only meant for small examples.
 python3 independent_set_vertex_cover.py
 python3 -m unittest test_independent_set_vertex_cover.py
 ```
+
+## Trying different gradient descent step sizes
+
+This is a one-dimensional gradient descent example with a quadratic whose
+minimum is at `x = 1`. I ran the same update with a small step, one close to
+the stability limit, and one just above it.
+
+The small step settles down steadily. The step near the limit keeps crossing
+over the minimum but still gets closer, while the too-large step slowly moves
+away. The script prints the final values and saves a plot of all three runs.
+
+```bash
+python3 quadratic_gradient_descent.py
+python3 -m unittest test_quadratic_gradient_descent.py
+```
+
+![Comparison of three gradient descent step sizes](quadratic_gradient_descent.png)
