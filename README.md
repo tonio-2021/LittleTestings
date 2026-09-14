@@ -99,3 +99,19 @@ python3 -m unittest test_quadratic_gradient_descent.py
 ```
 
 ![Comparison of three gradient descent step sizes](quadratic_gradient_descent.png)
+
+## Estimating an integral by averaging random heights
+
+The pi/log notebook counted random points under a curve. This little follow-up
+uses a different Monte Carlo trick: pick random x-values and average the
+heights of `1/x` there. Multiplying by the interval width estimates the area
+from 1 to 3, which is `ln(3)`.
+
+The script prints estimates for a few sample sizes, a rough standard error,
+and a midpoint-rule result for comparison. The random estimates do not have
+to improve on every single run.
+
+```bash
+python3 monte_carlo_integral.py
+python3 -m unittest test_monte_carlo_integral.py
+```
