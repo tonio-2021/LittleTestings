@@ -115,3 +115,21 @@ to improve on every single run.
 python3 monte_carlo_integral.py
 python3 -m unittest test_monte_carlo_integral.py
 ```
+
+## Learning a line with JAX
+
+This is a first small JAX training example. There are only five made-up data
+points and two things to learn: the slope and intercept of a line. JAX works
+out the gradient of the squared error; the script then takes ordinary gradient
+descent steps, like in the earlier quadratic example.
+
+I also calculate the direct least-squares answer to check where the learning
+loop ends up. The script prints the loss at the start, after 10 updates, and
+after 80 updates. It is meant as a small setup to play with, not a serious
+prediction model.
+
+```bash
+python3 -m pip install -r requirements.txt
+python3 jax_linear_regression.py
+python3 -m unittest test_jax_linear_regression.py
+```
