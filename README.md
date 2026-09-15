@@ -133,3 +133,21 @@ python3 -m pip install -r requirements.txt
 python3 jax_linear_regression.py
 python3 -m unittest test_jax_linear_regression.py
 ```
+
+## Separating two groups with JAX
+
+After fitting a line, I tried a similarly small classification example. The
+data only has two features and two groups. The model learns two weights and an
+intercept, then turns its score into a probability with the logistic function.
+
+JAX calculates the gradient of the logistic loss for the learning loop. I also
+checked that gradient with a small finite difference because it is quite easy
+to get a sign wrong here. On the toy points the loss goes down and all eight
+points end up on the expected side of the learned boundary.
+
+```bash
+python3 jax_logistic_regression.py
+python3 -m unittest test_jax_logistic_regression.py
+```
+
+![Decision boundary learned by the small JAX classifier](jax_logistic_regression.png)
