@@ -2,7 +2,7 @@
 
 from itertools import combinations
 
-from maximal_matching_vertex_cover import is_vertex_cover
+from graph_algorithms.maximal_matching_vertex_cover import is_vertex_cover
 
 
 def is_independent_set(edges, vertices):

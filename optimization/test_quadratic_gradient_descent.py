@@ -1,6 +1,6 @@
 import unittest
 
-from quadratic_gradient_descent import gradient_descent, quadratic_value
+from optimization.quadratic_gradient_descent import gradient_descent, quadratic_value
 
 
 class QuadraticGradientDescentTests(unittest.TestCase):

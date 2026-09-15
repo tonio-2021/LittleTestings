@@ -4,6 +4,20 @@ This is a collection of small things I try while going through different
 topics from university. Most of them are just short experiments to make the
 ideas a bit more concrete.
 
+## Folders
+
+- `learning` has the small JAX examples.
+- `monte_carlo` has the random sampling and integration experiments.
+- `optimization` has the gradient descent experiments.
+- `graph_algorithms` has the vertex-cover and independent-set examples.
+
+The tests stay beside the code they check. To run all of them from the main
+folder:
+
+```bash
+python3 -m unittest discover
+```
+
 ## Estimating pi, logarithms, and e with random points
 
 This started as a small Monte Carlo experiment for approximating pi. I added
@@ -24,7 +38,7 @@ looking for the point where that accumulated area reaches 1.
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-jupyter notebook monte_carlo_pi.ipynb
+jupyter notebook monte_carlo/monte_carlo_pi.ipynb
 ```
 
 The notebook uses the fixed seed `42`, so you should get the same result each
@@ -42,13 +56,13 @@ and the result is never more than twice as large as an optimal cover.
 Run the example with:
 
 ```bash
-python3 maximal_matching_vertex_cover.py
+python3 -m graph_algorithms.maximal_matching_vertex_cover
 ```
 
 The tests only use Python's standard library:
 
 ```bash
-python3 -m unittest test_maximal_matching_vertex_cover.py
+python3 -m unittest graph_algorithms.test_maximal_matching_vertex_cover
 ```
 
 ## Exact vertex cover on a tree
@@ -63,8 +77,8 @@ matching approximation takes all four vertices, while the tree method only
 needs two.
 
 ```bash
-python3 tree_vertex_cover.py
-python3 -m unittest test_tree_vertex_cover.py
+python3 -m graph_algorithms.tree_vertex_cover
+python3 -m unittest graph_algorithms.test_tree_vertex_cover
 ```
 
 ## Independent sets and vertex covers
@@ -79,8 +93,8 @@ add up to the number of vertices. The exhaustive search gets slow quickly, so
 this one is really only meant for small examples.
 
 ```bash
-python3 independent_set_vertex_cover.py
-python3 -m unittest test_independent_set_vertex_cover.py
+python3 -m graph_algorithms.independent_set_vertex_cover
+python3 -m unittest graph_algorithms.test_independent_set_vertex_cover
 ```
 
 ## Trying different gradient descent step sizes
@@ -94,11 +108,11 @@ over the minimum but still gets closer, while the too-large step slowly moves
 away. The script prints the final values and saves a plot of all three runs.
 
 ```bash
-python3 quadratic_gradient_descent.py
-python3 -m unittest test_quadratic_gradient_descent.py
+python3 -m optimization.quadratic_gradient_descent
+python3 -m unittest optimization.test_quadratic_gradient_descent
 ```
 
-![Comparison of three gradient descent step sizes](quadratic_gradient_descent.png)
+![Comparison of three gradient descent step sizes](optimization/quadratic_gradient_descent.png)
 
 ## Estimating an integral by averaging random heights
 
@@ -112,8 +126,8 @@ and a midpoint-rule result for comparison. The random estimates do not have
 to improve on every single run.
 
 ```bash
-python3 monte_carlo_integral.py
-python3 -m unittest test_monte_carlo_integral.py
+python3 -m monte_carlo.monte_carlo_integral
+python3 -m unittest monte_carlo.test_monte_carlo_integral
 ```
 
 ## Learning a line with JAX
@@ -130,8 +144,8 @@ prediction model.
 
 ```bash
 python3 -m pip install -r requirements.txt
-python3 jax_linear_regression.py
-python3 -m unittest test_jax_linear_regression.py
+python3 -m learning.jax_linear_regression
+python3 -m unittest learning.test_jax_linear_regression
 ```
 
 ## Separating two groups with JAX
@@ -146,8 +160,8 @@ to get a sign wrong here. On the toy points the loss goes down and all eight
 points end up on the expected side of the learned boundary.
 
 ```bash
-python3 jax_logistic_regression.py
-python3 -m unittest test_jax_logistic_regression.py
+python3 -m learning.jax_logistic_regression
+python3 -m unittest learning.test_jax_logistic_regression
 ```
 
-![Decision boundary learned by the small JAX classifier](jax_logistic_regression.png)
+![Decision boundary learned by the small JAX classifier](learning/jax_logistic_regression.png)

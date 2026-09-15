@@ -3,7 +3,7 @@ import unittest
 import jax
 import jax.numpy as jnp
 
-from jax_linear_regression import direct_fit, fit_with_jax, squared_error
+from learning.jax_linear_regression import direct_fit, fit_with_jax, squared_error
 
 
 class JaxLinearRegressionTests(unittest.TestCase):

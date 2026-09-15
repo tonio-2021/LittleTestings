@@ -1,12 +1,12 @@
 import unittest
 from itertools import combinations
 
-from independent_set_vertex_cover import (
+from graph_algorithms.independent_set_vertex_cover import (
     is_independent_set,
     maximum_independent_set,
     minimum_vertex_cover,
 )
-from maximal_matching_vertex_cover import is_vertex_cover
+from graph_algorithms.maximal_matching_vertex_cover import is_vertex_cover
 
 
 class IndependentSetVertexCoverTests(unittest.TestCase):

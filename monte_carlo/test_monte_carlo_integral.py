@@ -2,7 +2,7 @@ import math
 import random
 import unittest
 
-from monte_carlo_integral import estimate_integral, midpoint_integral
+from monte_carlo.monte_carlo_integral import estimate_integral, midpoint_integral
 
 
 class MonteCarloIntegralTests(unittest.TestCase):

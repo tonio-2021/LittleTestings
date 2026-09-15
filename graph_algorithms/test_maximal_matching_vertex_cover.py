@@ -1,6 +1,6 @@
 import unittest
 
-from maximal_matching_vertex_cover import (
+from graph_algorithms.maximal_matching_vertex_cover import (
     is_vertex_cover,
     maximal_matching_vertex_cover,
 )

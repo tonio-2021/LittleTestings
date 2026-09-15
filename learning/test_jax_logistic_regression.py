@@ -4,7 +4,7 @@ import unittest
 import jax
 import jax.numpy as jnp
 
-from jax_logistic_regression import (
+from learning.jax_logistic_regression import (
     classify,
     logistic_loss,
     predict_probabilities,

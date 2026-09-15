@@ -1,5 +1,7 @@
 """A small binary classifier trained with JAX gradients."""
 
+from pathlib import Path
+
 import jax
 import jax.numpy as jnp
 
@@ -54,10 +56,12 @@ def classify(params, x, threshold=0.5):
     return (predict_probabilities(params, x) >= threshold).astype(int)
 
 
-def save_plot(params, x, y, filename="jax_logistic_regression.png"):
+def save_plot(params, x, y, filename=None):
     import matplotlib.pyplot as plt
 
     x, y = check_data(x, y)
+    if filename is None:
+        filename = Path(__file__).with_name("jax_logistic_regression.png")
     fig, ax = plt.subplots(figsize=(7, 5))
     ax.scatter(x[y == 0, 0], x[y == 0, 1], label="group 0", color="tab:blue")
     ax.scatter(x[y == 1, 0], x[y == 1, 1], label="group 1", color="tab:orange")
@@ -107,7 +111,7 @@ def run_example():
     print(f"Learned values:    {params}")
 
     save_plot(params, x, y)
-    print("Saved jax_logistic_regression.png")
+    print("Saved learning/jax_logistic_regression.png")
 
 
 if __name__ == "__main__":

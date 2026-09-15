@@ -1,5 +1,7 @@
 """Trying a few gradient descent step sizes on a simple quadratic."""
 
+from pathlib import Path
+
 
 def quadratic_value(x, centre=1.0, curvature=2.0):
     """Value of a quadratic whose minimum is at centre."""
@@ -30,9 +32,12 @@ def gradient_descent(start, step_size, iterations, centre=1.0, curvature=2.0):
     return positions, values
 
 
-def save_comparison_plot(filename="quadratic_gradient_descent.png"):
+def save_comparison_plot(filename=None):
     """Run three step sizes and save their paths in one figure."""
     from matplotlib import pyplot as plt
+
+    if filename is None:
+        filename = Path(__file__).with_name("quadratic_gradient_descent.png")
 
     start = -4.0
     centre = 1.0
@@ -95,7 +100,7 @@ def run_example():
         )
 
     save_comparison_plot()
-    print("\nSaved the comparison as quadratic_gradient_descent.png")
+    print("\nSaved the comparison as optimization/quadratic_gradient_descent.png")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 import unittest
 
-from maximal_matching_vertex_cover import is_vertex_cover
-from tree_vertex_cover import minimum_tree_vertex_cover
+from graph_algorithms.maximal_matching_vertex_cover import is_vertex_cover
+from graph_algorithms.tree_vertex_cover import minimum_tree_vertex_cover
 
 
 class TreeVertexCoverTests(unittest.TestCase):
