@@ -8,7 +8,7 @@ ideas a bit more concrete.
 
 - `learning` has the small JAX examples.
 - `monte_carlo` has the random sampling and integration experiments.
-- `optimization` has the gradient descent experiments.
+- `optimization` has gradient descent and other small optimization examples.
 - `graph_algorithms` has the vertex-cover and independent-set examples.
 
 The tests stay beside the code they check. To run all of them from the main
@@ -179,3 +179,18 @@ python3 -m unittest monte_carlo.discrete_inversion.test_sampler
 ```
 
 There is a short [note with the example](monte_carlo/discrete_inversion/README.md).
+
+## Fractional knapsack
+
+This one fills a small bag by taking the items with the most value per unit of
+weight first. Taking part of an item is allowed, so the last pick might be a
+fraction. The script prints its choices and checks the final value with a
+linear-programming solve on the same toy items.
+
+```bash
+python3 -m optimization.fractional_knapsack.knapsack
+python3 -m unittest optimization.fractional_knapsack.test_knapsack
+```
+
+The [short note](optimization/fractional_knapsack/README.md) has the example's
+result.
