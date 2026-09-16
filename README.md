@@ -194,3 +194,16 @@ python3 -m unittest optimization.fractional_knapsack.test_knapsack
 
 The [short note](optimization/fractional_knapsack/README.md) has the example's
 result.
+
+## Checking JAX derivatives
+
+This is a small check of automatic differentiation on a function with two
+inputs. JAX gives a gradient and a Hessian trace; the script also estimates
+both by changing each input a little and compares the numbers.
+
+```bash
+python3 -m optimization.jax_derivatives.derivatives
+python3 -m unittest optimization.jax_derivatives.test_derivatives
+```
+
+There is a [short note](optimization/jax_derivatives/README.md) beside the code.
