@@ -165,3 +165,17 @@ python3 -m unittest learning.test_jax_logistic_regression
 ```
 
 ![Decision boundary learned by the small JAX classifier](learning/jax_logistic_regression.png)
+
+## Picking from a probability table
+
+This is a small discrete inversion sampling example. It makes cumulative
+probabilities from four toy choices, then tries a plain scan and a binary
+search on the same random numbers. The two searches agree, and the observed
+shares from 10,000 picks are close to the probabilities I started with.
+
+```bash
+python3 -m monte_carlo.discrete_inversion.sampler
+python3 -m unittest monte_carlo.discrete_inversion.test_sampler
+```
+
+There is a short [note with the example](monte_carlo/discrete_inversion/README.md).
