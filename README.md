@@ -199,7 +199,9 @@ result.
 
 This is a small check of automatic differentiation on a function with two
 inputs. JAX gives a gradient and a Hessian trace; the script also estimates
-both by changing each input a little and compares the numbers.
+both by changing each input a little and compares the numbers. I added a
+small repeated-call timing check too. It says which method was faster on that
+run, without treating this tiny example as a general speed test.
 
 ```bash
 python3 -m optimization.jax_derivatives.derivatives

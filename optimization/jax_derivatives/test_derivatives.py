@@ -2,6 +2,7 @@ import math
 import unittest
 
 from optimization.jax_derivatives.derivatives import (
+    benchmark_derivatives,
     finite_difference_derivatives,
     jax_derivatives,
 )
@@ -34,6 +35,18 @@ class DerivativeTests(unittest.TestCase):
             with self.subTest(step=step):
                 with self.assertRaises(ValueError):
                     finite_difference_derivatives((0, 0), step)
+
+    def test_timing_reports_both_methods(self):
+        timings = benchmark_derivatives(repeats=10)
+
+        self.assertEqual(set(timings), {"JAX", "finite differences"})
+        self.assertTrue(all(math.isfinite(value) and value > 0 for value in timings.values()))
+
+    def test_bad_timing_count(self):
+        for repeats in (0, -1, 2.5, True):
+            with self.subTest(repeats=repeats):
+                with self.assertRaises(ValueError):
+                    benchmark_derivatives(repeats=repeats)
 
 
 if __name__ == "__main__":

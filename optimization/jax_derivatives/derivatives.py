@@ -1,6 +1,8 @@
 """Compare JAX derivatives with small changes to the inputs."""
 
 import math
+from statistics import median
+from time import perf_counter
 
 import jax
 import jax.numpy as jnp
@@ -18,11 +20,17 @@ def _check_point(point):
     return point
 
 
-def jax_derivatives(point):
-    point = jnp.asarray(_check_point(point), dtype=float)
+@jax.jit
+def _compiled_derivatives(point):
     gradient = jax.grad(toy_function)(point)
     hessian = jax.hessian(toy_function)(point)
-    return tuple(float(value) for value in gradient), float(jnp.trace(hessian))
+    return gradient, jnp.trace(hessian)
+
+
+def jax_derivatives(point):
+    point = jnp.asarray(_check_point(point), dtype=float)
+    gradient, trace = _compiled_derivatives(point)
+    return tuple(float(value) for value in gradient), float(trace)
 
 
 def finite_difference_derivatives(point, step=0.001):
@@ -53,6 +61,31 @@ def finite_difference_derivatives(point, step=0.001):
     return tuple(gradient), trace
 
 
+def benchmark_derivatives(point=(0.7, -0.4), repeats=200):
+    """Median seconds per call after JAX has compiled the small function."""
+    point = _check_point(point)
+    if isinstance(repeats, bool) or not isinstance(repeats, int) or repeats < 1:
+        raise ValueError("repeats must be a positive integer")
+
+    # The first JAX call includes compilation, so I leave it out of this timing.
+    jax_derivatives(point)
+    finite_difference_derivatives(point)
+    methods = {
+        "JAX": jax_derivatives,
+        "finite differences": finite_difference_derivatives,
+    }
+    measurements = {name: [] for name in methods}
+
+    for _ in range(3):
+        for name, method in methods.items():
+            start = perf_counter()
+            for _ in range(repeats):
+                method(point)
+            measurements[name].append((perf_counter() - start) / repeats)
+
+    return {name: median(values) for name, values in measurements.items()}
+
+
 def run_example():
     point = (0.7, -0.4)
     jax_gradient, jax_trace = jax_derivatives(point)
@@ -63,6 +96,13 @@ def run_example():
     print(f"Finite difference:   ({rough_gradient[0]:.5f}, {rough_gradient[1]:.5f})")
     print(f"JAX Hessian trace:   {jax_trace:.5f}")
     print(f"Finite difference:   {rough_trace:.5f}")
+
+    timings = benchmark_derivatives(point)
+    print("\nRepeated calls after JAX warm-up (median of 3 runs):")
+    for name, seconds in timings.items():
+        print(f"  {name:18} {seconds * 1_000_000:.1f} microseconds per call")
+    faster = min(timings, key=timings.get)
+    print(f"Faster for this tiny example: {faster}")
 
 
 if __name__ == "__main__":
