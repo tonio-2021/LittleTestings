@@ -207,3 +207,18 @@ python3 -m unittest optimization.jax_derivatives.test_derivatives
 ```
 
 There is a [short note](optimization/jax_derivatives/README.md) beside the code.
+
+## Continuous inversion sampling
+
+This follows the probability-table sampler with two continuous examples. A
+uniform random number goes through an inverse CDF to produce either an
+exponential or a power-distribution sample. The script compares the sample
+quartiles with the expected ones.
+
+```bash
+python3 -m monte_carlo.continuous_inversion.sampler
+python3 -m unittest monte_carlo.continuous_inversion.test_sampler
+```
+
+The [short note](monte_carlo/continuous_inversion/README.md) explains the two
+examples.
