@@ -224,3 +224,21 @@ python3 -m unittest monte_carlo.continuous_inversion.test_sampler
 
 The [short note](monte_carlo/continuous_inversion/README.md) explains the two
 examples.
+
+## Cliques and complement graphs
+
+This continues the small independent-set experiment. The script makes the
+complement of a graph by swapping present and missing edges, then checks that
+a clique in the original graph is an independent set in the complement. It
+keeps the vertex names unchanged so the connection is easy to see.
+
+The largest clique is found by checking every subset, so this is just for
+small graphs.
+
+```bash
+python3 -m graph_algorithms.clique_complement.checker
+python3 -m unittest graph_algorithms.clique_complement.test_checker
+```
+
+There is a [short note](graph_algorithms/clique_complement/README.md) beside
+the example.
