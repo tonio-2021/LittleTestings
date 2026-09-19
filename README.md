@@ -242,3 +242,20 @@ python3 -m unittest graph_algorithms.clique_complement.test_checker
 
 There is a [short note](graph_algorithms/clique_complement/README.md) beside
 the example.
+
+## Finite-difference step sizes
+
+This compares forward and centered estimates of the derivative of `sin(x)`.
+It tries steps from `1e-1` down to `1e-16` and plots the absolute error. The
+centered formula gets accurate more quickly, but both methods eventually get
+worse when the subtraction runs into floating-point precision.
+
+```bash
+python3 -m optimization.finite_difference_accuracy.differences
+python3 -m unittest optimization.finite_difference_accuracy.test_differences
+```
+
+![Forward and centered finite-difference errors](optimization/finite_difference_accuracy/finite_difference_accuracy.png)
+
+There is a [short note](optimization/finite_difference_accuracy/README.md)
+with the example.
