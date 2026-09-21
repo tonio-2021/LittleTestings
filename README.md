@@ -259,3 +259,18 @@ python3 -m unittest optimization.finite_difference_accuracy.test_differences
 
 There is a [short note](optimization/finite_difference_accuracy/README.md)
 with the example.
+
+## A product stopping time
+
+This experiment multiplies uniform random numbers until the running product
+falls below `exp(-2)`. It repeats this 20,000 times and compares the observed
+stopping counts with the related Poisson probabilities. The sample mean and
+variance should be near 3 and 2, but they move slightly from run to run.
+
+```bash
+python3 -m monte_carlo.product_stopping_time.simulation
+python3 -m unittest monte_carlo.product_stopping_time.test_simulation
+```
+
+There is a [short note](monte_carlo/product_stopping_time/README.md) with the
+small calculation behind the comparison.
