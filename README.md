@@ -274,3 +274,18 @@ python3 -m unittest monte_carlo.product_stopping_time.test_simulation
 
 There is a [short note](monte_carlo/product_stopping_time/README.md) with the
 small calculation behind the comparison.
+
+## Greedy interval scheduling
+
+This picks a large set of non-overlapping activities by always choosing the
+one that finishes first. The example also tries earliest-start and
+shortest-duration rules, with a small counterexample for each one. A
+brute-force search checks the result while the input is still tiny.
+
+```bash
+python3 -m optimization.interval_scheduling.scheduling
+python3 -m unittest optimization.interval_scheduling.test_scheduling
+```
+
+There is a [short note](optimization/interval_scheduling/README.md) beside
+the implementation.
