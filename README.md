@@ -289,3 +289,17 @@ python3 -m unittest optimization.interval_scheduling.test_scheduling
 
 There is a [short note](optimization/interval_scheduling/README.md) beside
 the implementation.
+
+## Symmetric and antisymmetric matrix parts
+
+This splits a square matrix into `(A + A.T) / 2` and `(A - A.T) / 2`. The
+example adds them back together, checks their transpose rules, and verifies
+that `x.T @ K @ x` is zero for the antisymmetric part `K`.
+
+```bash
+python3 -m optimization.matrix_decomposition.decomposition
+python3 -m unittest optimization.matrix_decomposition.test_decomposition
+```
+
+There is a [short note](optimization/matrix_decomposition/README.md) with the
+formulas used in the check.
