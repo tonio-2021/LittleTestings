@@ -10,9 +10,10 @@ stopping count is one more than a Poisson random variable with mean 2, so its
 mean should be 3 and its variance should be 2.
 
 The script simulates 20,000 runs and puts the observed mean, variance, and
-first six probabilities beside those calculated values. It deliberately does
-not fix a seed, so the displayed numbers move slightly between runs. The tests
-use their own fixed seed so they stay repeatable.
+first eight probabilities beside those calculated values. It also saves a bar
+chart so the two sets of probabilities are easier to compare. It deliberately
+does not fix a seed, so the displayed numbers and bar heights move slightly
+between runs. The tests use their own fixed seed so they stay repeatable.
 
 From the main folder:
 
@@ -20,3 +21,5 @@ From the main folder:
 python3 -m monte_carlo.product_stopping_time.simulation
 python3 -m unittest monte_carlo.product_stopping_time.test_simulation
 ```
+
+![Observed and calculated stopping-count probabilities](stopping_count_probabilities.png)

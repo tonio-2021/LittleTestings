@@ -3,6 +3,7 @@
 import math
 import random
 from collections import Counter
+from pathlib import Path
 from statistics import mean, pvariance
 
 
@@ -82,11 +83,60 @@ def theoretical_summary(threshold, largest_count=6):
     return rate + 1, rate, probabilities
 
 
+def save_probability_plot(observed, expected, filename=None):
+    """Put the simulated and calculated probabilities beside each other."""
+    counts = sorted(observed)
+    if not counts or set(observed) != set(expected):
+        raise ValueError("observed and expected need the same counts")
+
+    all_values = [*observed.values(), *expected.values()]
+    if any(not math.isfinite(value) or value < 0 for value in all_values):
+        raise ValueError("probabilities need to be finite and nonnegative")
+
+    from matplotlib import pyplot as plt
+
+    if filename is None:
+        filename = Path(__file__).with_name("stopping_count_probabilities.png")
+
+    positions = list(range(len(counts)))
+    width = 0.38
+    fig, axis = plt.subplots(figsize=(7, 4.5))
+    axis.bar(
+        [position - width / 2 for position in positions],
+        [observed[count] for count in counts],
+        width,
+        label="simulated",
+    )
+    axis.bar(
+        [position + width / 2 for position in positions],
+        [expected[count] for count in counts],
+        width,
+        label="calculated",
+    )
+    axis.set_xticks(positions, counts)
+    axis.set(
+        xlabel="stopping count",
+        ylabel="probability",
+        title="How many uniforms are multiplied before stopping?",
+    )
+    axis.legend()
+    fig.tight_layout()
+    fig.savefig(filename, dpi=150)
+    plt.close(fig)
+    return Path(filename)
+
+
 def run_example():
     threshold = math.exp(-2)
     counts = simulate_counts(20_000, threshold)
-    sample_mean, sample_variance, observed = summarize_counts(counts)
-    exact_mean, exact_variance, expected = theoretical_summary(threshold)
+    sample_mean, sample_variance, observed = summarize_counts(
+        counts,
+        largest_count=8,
+    )
+    exact_mean, exact_variance, expected = theoretical_summary(
+        threshold,
+        largest_count=8,
+    )
 
     print(f"Stopping when the product falls below exp(-2) = {threshold:.4f}")
     print(f"Simulated mean:     {sample_mean:.4f}")
@@ -97,7 +147,11 @@ def run_example():
     for count in observed:
         print(f"{count:6d}   {observed[count]:8.4f}   {expected[count]:10.4f}")
 
-    print("\nThe numbers move a little each run because the example does not fix a seed.")
+    plot_path = save_probability_plot(observed, expected)
+    print(
+        "\nThe numbers move a little each run because the example does not fix a seed."
+    )
+    print(f"Saved the probability comparison as {plot_path.name}")
 
 
 if __name__ == "__main__":

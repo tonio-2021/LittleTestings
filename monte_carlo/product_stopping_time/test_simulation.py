@@ -3,6 +3,7 @@ import random
 import unittest
 
 from monte_carlo.product_stopping_time.simulation import (
+    save_probability_plot,
     simulate_counts,
     stopping_count,
     summarize_counts,
@@ -59,6 +60,8 @@ class ProductStoppingTimeTests(unittest.TestCase):
             simulate_counts(0, 0.2)
         with self.assertRaises(ValueError):
             summarize_counts([])
+        with self.assertRaises(ValueError):
+            save_probability_plot({1: 0.5}, {1: 0.5, 2: 0.5})
 
 
 if __name__ == "__main__":
