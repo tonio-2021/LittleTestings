@@ -306,3 +306,17 @@ python3 -m unittest optimization.matrix_decomposition.test_decomposition
 
 There is a [short note](optimization/matrix_decomposition/README.md) with the
 formulas used in the check.
+
+## Trying random cuts
+
+This puts every vertex of a small weighted graph on one of two sides at
+random. An edge adds to the cut when its endpoints land on different sides.
+The example repeats this 5,000 times and compares the average and best result
+with an exhaustive search on the same four vertices.
+
+```bash
+python3 -m optimization.random_cut.random_cut
+python3 -m unittest optimization.random_cut.test_random_cut
+```
+
+There is a [short note](optimization/random_cut/README.md) beside the code.
