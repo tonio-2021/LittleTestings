@@ -320,3 +320,18 @@ python3 -m unittest optimization.random_cut.test_random_cut
 ```
 
 There is a [short note](optimization/random_cut/README.md) beside the code.
+
+## Checking a change of variables
+
+This checks the chain rule for a function written as `G(x) = F(Mx)`. The
+script calculates `M.T @ grad F(Mx)` directly and compares it with the
+gradient from JAX. It uses one square matrix and one rectangular matrix so
+the dimensions are a little easier to see.
+
+```bash
+python3 -m optimization.change_of_variables.gradients
+python3 -m unittest optimization.change_of_variables.test_gradients
+```
+
+There is a [short note](optimization/change_of_variables/README.md) beside
+the code.
