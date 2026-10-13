@@ -335,3 +335,20 @@ python3 -m unittest optimization.change_of_variables.test_gradients
 
 There is a [short note](optimization/change_of_variables/README.md) beside
 the code.
+
+## A tiny congruential generator
+
+This implements the recurrence `x[n] = a*x[n-1] mod m` with deliberately
+small numbers. With modulus `31`, multiplier `3` visits all 30 nonzero states,
+while multiplier `2` repeats after only five. A successive-pairs plot puts
+the two patterns beside each other.
+
+```bash
+python3 -m monte_carlo.congruential_generator.generator
+python3 -m unittest monte_carlo.congruential_generator.test_generator
+```
+
+![Successive pairs from the two toy generators](monte_carlo/congruential_generator/successive_pairs.png)
+
+There is a [short note](monte_carlo/congruential_generator/README.md) beside
+the code.
