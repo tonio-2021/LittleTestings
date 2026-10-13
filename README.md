@@ -352,3 +352,18 @@ python3 -m unittest monte_carlo.congruential_generator.test_generator
 
 There is a [short note](monte_carlo/congruential_generator/README.md) beside
 the code.
+
+## Scheduling jobs by deadline
+
+This is a small maximum-lateness scheduling example. It orders jobs by their
+deadlines, then records when each one finishes and how early or late it is.
+On four toy jobs, the deadline order lowers the maximum lateness from `3` to
+`1`, matching an exhaustive check of every order.
+
+```bash
+python3 -m optimization.maximum_lateness.scheduling
+python3 -m unittest optimization.maximum_lateness.test_scheduling
+```
+
+There is a [short note](optimization/maximum_lateness/README.md) beside the
+implementation.
